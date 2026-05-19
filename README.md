@@ -1,50 +1,75 @@
-# Welcome to your Expo app 👋
+# Task Manager React Native App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Simple task manager app built with Expo Router and React Native.
 
-## Get started
+## Setup and Run
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+1. Install dependencies:
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Start the development server:
 
-## Learn more
+```bash
+npm run start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+3. Run on a platform:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npm run ios
+npm run android
+npm run web
+```
 
-## Join the community
+Notes:
+- You can also press `i`, `a`, or `w` in the Expo CLI after `npm run start`.
+- This project uses Expo SDK 54. Use matching Expo Go/dev tooling for best compatibility.
 
-Join our community of developers creating universal apps.
+## App Features and Usage
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Features
+- Add new tasks from the input field.
+- Mark tasks as complete/incomplete.
+- Delete tasks.
+- Live task progress label in the header (`done/total`).
+- Empty state message when no tasks exist.
+- Animated visual feedback when toggling completion.
+
+### Special Instructions
+- Tasks are stored in component state only (no persistence yet).
+- Closing/reloading the app clears all tasks.
+- Very long task text is visually constrained in the list for readability.
+
+## Project Structure
+
+```text
+app/
+   _layout.tsx
+   index.tsx
+   components/
+      TaskHeader.tsx
+      TaskInput.tsx
+      TaskItem.tsx
+      TaskEmptyState.tsx
+   types/
+      task.ts
+```
+
+## Third-Party Libraries Used
+
+- `expo`: Core runtime and tooling for React Native development.
+- `expo-router`: File-based navigation and app entry integration.
+- `react`: Component model and state management primitives.
+- `react-native`: Cross-platform native UI framework.
+- `react-native-reanimated`: Smooth task row completion animations.
+- `react-native-safe-area-context`: Correct layout inside safe areas (notches, status bars, home indicator).
+
+## Useful Commands
+
+```bash
+npm run lint
+npm run reset-project
+```
