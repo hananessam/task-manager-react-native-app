@@ -6,11 +6,13 @@ import { TaskEmptyState } from "./components/TaskEmptyState";
 import { TaskHeader } from "./components/TaskHeader";
 import { TaskInput } from "./components/TaskInput";
 import { TaskItem } from "./components/TaskItem";
+import { useTaskTheme } from "./theme/ThemeContext";
 import { Task } from "./types/task";
 
 export default function Index() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [description, setDescription] = useState("");
+  const { theme } = useTaskTheme();
 
   const hasTasks = tasks.length > 0;
 
@@ -51,17 +53,21 @@ export default function Index() {
   };
 
   const renderItem = ({ item }: { item: Task }) => (
-    <TaskItem task={item} onToggle={toggleTask} onDelete={deleteTask} />
+    <TaskItem task={item} onToggle={toggleTask} onDelete={deleteTask} theme={theme} />
   );
 
   return (
-    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
-      <TaskHeader tasksLabel={tasksLabel} />
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.screenBackground }]}
+      edges={["top", "bottom"]}
+    >
+      <TaskHeader tasksLabel={tasksLabel} theme={theme} />
 
       <TaskInput
         description={description}
         onChangeDescription={setDescription}
         onAddTask={addTask}
+        theme={theme}
       />
 
       <FlatList
@@ -70,7 +76,7 @@ export default function Index() {
         renderItem={renderItem}
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={[styles.listContent, !hasTasks && styles.emptyListContent]}
-        ListEmptyComponent={<TaskEmptyState />}
+        ListEmptyComponent={<TaskEmptyState theme={theme} />}
       />
     </SafeAreaView>
   );
@@ -79,7 +85,6 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F2F7FC",
     paddingHorizontal: 16,
     paddingTop: 8,
   },

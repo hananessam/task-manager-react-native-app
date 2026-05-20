@@ -1,10 +1,16 @@
+import { useMemo } from "react";
 import { StyleSheet, Text, View } from "react-native";
+
+import { TaskTheme } from "../theme/taskTheme";
 
 type TaskHeaderProps = {
   tasksLabel: string;
+  theme: TaskTheme;
 };
 
-export function TaskHeader({ tasksLabel }: Readonly<TaskHeaderProps>) {
+export function TaskHeader({ tasksLabel, theme }: Readonly<TaskHeaderProps>) {
+  const styles = useMemo(() => createStyles(theme), [theme]);
+
   return (
     <View style={styles.header}>
       <Text selectable style={styles.title}>
@@ -17,20 +23,21 @@ export function TaskHeader({ tasksLabel }: Readonly<TaskHeaderProps>) {
   );
 }
 
-const styles = StyleSheet.create({
-  header: {
-    marginTop: 8,
-    marginBottom: 14,
-    gap: 4,
-  },
-  title: {
-    fontSize: 30,
-    fontWeight: "800",
-    color: "#113B67",
-  },
-  subtitle: {
-    fontSize: 14,
-    color: "#4B6682",
-    fontVariant: ["tabular-nums"],
-  },
-});
+const createStyles = (theme: TaskTheme) =>
+  StyleSheet.create({
+    header: {
+      marginTop: 8,
+      marginBottom: 14,
+      gap: 4,
+    },
+    title: {
+      fontSize: 30,
+      fontWeight: "800",
+      color: theme.titleText,
+    },
+    subtitle: {
+      fontSize: 14,
+      color: theme.subtitleText,
+      fontVariant: ["tabular-nums"],
+    },
+  });
